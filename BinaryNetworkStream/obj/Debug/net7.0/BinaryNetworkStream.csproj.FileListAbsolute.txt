@@ -1,0 +1,12 @@
+C:\Projects\Temp\BinaryNetworkStream\BinaryNetworkStream\bin\Debug\net7.0\BinaryNetworkStream.deps.json
+C:\Projects\Temp\BinaryNetworkStream\BinaryNetworkStream\bin\Debug\net7.0\BinaryNetworkStream.dll
+C:\Projects\Temp\BinaryNetworkStream\BinaryNetworkStream\bin\Debug\net7.0\BinaryNetworkStream.pdb
+C:\Projects\Temp\BinaryNetworkStream\BinaryNetworkStream\obj\Debug\net7.0\BinaryNetworkStream.csproj.AssemblyReference.cache
+C:\Projects\Temp\BinaryNetworkStream\BinaryNetworkStream\obj\Debug\net7.0\BinaryNetworkStream.GeneratedMSBuildEditorConfig.editorconfig
+C:\Projects\Temp\BinaryNetworkStream\BinaryNetworkStream\obj\Debug\net7.0\BinaryNetworkStream.AssemblyInfoInputs.cache
+C:\Projects\Temp\BinaryNetworkStream\BinaryNetworkStream\obj\Debug\net7.0\BinaryNetworkStream.AssemblyInfo.cs
+C:\Projects\Temp\BinaryNetworkStream\BinaryNetworkStream\obj\Debug\net7.0\BinaryNetworkStream.csproj.CoreCompileInputs.cache
+C:\Projects\Temp\BinaryNetworkStream\BinaryNetworkStream\obj\Debug\net7.0\BinaryNetworkStream.dll
+C:\Projects\Temp\BinaryNetworkStream\BinaryNetworkStream\obj\Debug\net7.0\refint\BinaryNetworkStream.dll
+C:\Projects\Temp\BinaryNetworkStream\BinaryNetworkStream\obj\Debug\net7.0\BinaryNetworkStream.pdb
+C:\Projects\Temp\BinaryNetworkStream\BinaryNetworkStream\obj\Debug\net7.0\ref\BinaryNetworkStream.dll
