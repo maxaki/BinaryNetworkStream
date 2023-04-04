@@ -1,4 +1,7 @@
-﻿namespace BinaryNetworkStream;
+﻿using System;
+using System.IO;
+
+namespace BinaryNetworkStream;
 
 public interface ITcpReader : IDisposable
 {

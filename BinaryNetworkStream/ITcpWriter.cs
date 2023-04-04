@@ -1,4 +1,6 @@
-﻿namespace BinaryNetworkStream;
+﻿using System;
+
+namespace BinaryNetworkStream;
 
 public interface ITcpWriter : IDisposable
 {
