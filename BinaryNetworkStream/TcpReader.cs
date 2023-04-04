@@ -67,11 +67,11 @@ public class TcpReader
 		}
 	}
 
-	protected void ReadToStream(Stream destination, int size)
+	protected void ReadToStream(Stream destination, int length)
 	{
 		try
 		{
-			ReadExactBytesToStream(destination, size);
+			ReadExactBytesToStream(destination, length);
 		}
 		catch (Exception ex)
 		{

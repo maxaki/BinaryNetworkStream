@@ -1,4 +1,5 @@
-﻿using System.Net.Sockets;
+﻿using System.Buffers;
+using System.Net.Sockets;
 
 namespace BinaryNetworkStream;
 
@@ -10,6 +11,23 @@ public class TcpWriter
 	{
 		_socket = socket;
 	}
+	protected void WriteCore(Stream stream)
+	{
+		var buffer = ArrayPool<byte>.Shared.Rent((int)stream.Length);
+		try
+		{
+			int bytesRead;
+			while ((bytesRead = stream.Read(buffer, 0, buffer.Length)) != 0)
+			{
+				WriteCore(buffer.AsSpan(0, bytesRead));
+			}
+		}
+		finally
+		{
+			ArrayPool<byte>.Shared.Return(buffer);
+		}
+	}
+	
 	protected void WriteCore(ReadOnlySpan<byte> buffer)
 	{
 		try

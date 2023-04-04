@@ -9,9 +9,9 @@ public class NetworkReader : TcpReader, ITcpReader
 	public NetworkReader(Socket socket) : base(socket)
 	{
 	}
-	public void Read(Stream destination, int size)
+	public void Read(Stream destination, int length)
 	{
-		ReadToStream(destination, size);
+		ReadToStream(destination, length);
 	}
 	private Span<byte> Read(Span<byte> buffer)
 	{

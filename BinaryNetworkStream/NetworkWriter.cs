@@ -12,7 +12,10 @@ public class NetworkWriter : TcpWriter, ITcpWriter
 	public NetworkWriter(Socket socket) : base(socket)
 	{
 	}
-
+	public void Write(Stream stream)
+	{
+		WriteCore(stream);
+	}
 	public void Write(ReadOnlySpan<byte> buffer)
 	{
 		WriteCore(buffer);
