@@ -20,22 +20,19 @@ public class NetworkReader : TcpReader, ITcpReader
 		ReadBytesCore(buffer);
 		return buffer;
 	}
-
-	public Span<byte> ReadPacket(Span<byte> buffer)
+	public void ReadPacket(byte[] buffer)
 	{
 		var size = ReadInt32();
 		if (buffer.Length < size)
-			buffer = new Span<byte>(new byte[size]);
-
-		var returnBuffer = buffer[..size];
-		ReadBytesCore(returnBuffer);
-		return returnBuffer;
+			buffer = new byte[size];
+		
+		ReadBytesCore(buffer.AsSpan()[..size]);
 	}
 
-	public Span<byte> ReadPacket()
+	public byte[] ReadPacket()
 	{
 		var size = ReadInt32();
-		var buffer = new Span<byte>(new byte[size]);
+		var buffer = new byte[size];
 		ReadBytesCore(buffer);
 		return buffer;
 	}

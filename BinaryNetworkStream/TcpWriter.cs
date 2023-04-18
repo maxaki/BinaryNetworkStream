@@ -11,16 +11,25 @@ public class TcpWriter
 	{
 		_socket = socket;
 	}
-	protected void WriteCore(Stream stream)
+	protected void WriteCore(Stream stream, int length)
 	{
-		var buffer = ArrayPool<byte>.Shared.Rent((int)stream.Length);
+		var bufferLength = length > 0 ? length : (int)stream.Length;
+		var buffer = ArrayPool<byte>.Shared.Rent(bufferLength);
 		try
 		{
 			int bytesRead;
-			while ((bytesRead = stream.Read(buffer, 0, buffer.Length)) != 0)
+			var totalBytesRead = 0;
+			while (totalBytesRead < bufferLength && (bytesRead = stream.Read(buffer, totalBytesRead, bufferLength - totalBytesRead)) != 0)
 			{
-				WriteCore(buffer.AsSpan(0, bytesRead));
+				totalBytesRead += bytesRead;
 			}
+
+			if (totalBytesRead != bufferLength)
+			{
+				throw new ArgumentException("Stream did not contain enough data to write", nameof(stream));
+			}
+
+			WriteCore(buffer.AsSpan(0, totalBytesRead));
 		}
 		finally
 		{

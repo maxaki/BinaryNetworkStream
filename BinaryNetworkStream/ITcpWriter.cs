@@ -5,7 +5,7 @@ namespace BinaryNetworkStream;
 public interface ITcpWriter : IDisposable
 {
 	void WritePacket(ReadOnlySpan<byte> buffer);
-	void Write(Stream stream);
+	void Write(Stream stream, int length);
 	void Write(ReadOnlySpan<byte> buffer);
 	void Write(bool value);
 	void Write(byte value);

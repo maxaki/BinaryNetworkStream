@@ -13,10 +13,11 @@ public class NetworkWriter : TcpWriter, ITcpWriter
 	{
 	}
 	
-	public void Write(Stream stream)
+	public void Write(Stream stream, int length)
 	{
-		WriteCore(stream);
+		WriteCore(stream, length);
 	}
+	
 	public void WritePacket(ReadOnlySpan<byte> buffer)
 	{
 		Write(buffer.Length);
