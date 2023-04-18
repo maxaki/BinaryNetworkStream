@@ -9,25 +9,37 @@ public class NetworkReader : TcpReader, ITcpReader
 	public NetworkReader(Socket socket) : base(socket)
 	{
 	}
+
 	public void Read(Stream destination, int length)
 	{
 		ReadToStream(destination, length);
 	}
+
 	private Span<byte> Read(Span<byte> buffer)
 	{
 		ReadBytesCore(buffer);
 		return buffer;
 	}
+
 	public Span<byte> ReadPacket(Span<byte> buffer)
 	{
 		var size = ReadInt32();
 		if (buffer.Length < size)
 			buffer = new Span<byte>(new byte[size]);
-		
+
 		var returnBuffer = buffer[..size];
 		ReadBytesCore(returnBuffer);
 		return returnBuffer;
 	}
+
+	public Span<byte> ReadPacket()
+	{
+		var size = ReadInt32();
+		var buffer = new Span<byte>(new byte[size]);
+		ReadBytesCore(buffer);
+		return buffer;
+	}
+
 	public Guid ReadGuid() => new Guid(Read(stackalloc byte[16]));
 	public int ReadInt32() => BitConverter.ToInt32(Read(stackalloc byte[sizeof(int)]));
 	public uint ReadUInt32() => BitConverter.ToUInt32(Read(stackalloc byte[sizeof(uint)]));

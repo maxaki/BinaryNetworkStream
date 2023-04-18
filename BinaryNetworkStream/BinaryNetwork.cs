@@ -2,24 +2,35 @@
 
 namespace BinaryNetworkStream;
 
-public class NetworkStreamHandler : ITcpReader, ITcpWriter
+public class BinaryNetwork : ITcpReader, ITcpWriter
 {
 	public bool Connected => _socket?.Connected is true;
 	private readonly ITcpReader _reader;
 	private readonly ITcpWriter _writer;
 	private readonly Socket _socket;
 
-	public NetworkStreamHandler(Socket socket)
+	public BinaryNetwork(Socket socket)
 	{
 		_socket = socket;
 		_reader = new NetworkReader(socket);
 		_writer = new NetworkWriter(socket);
 	}
-	
-	// Implement ITcpReader methods by forwarding calls to the _reader instance
+
+	public void Disconnect()
+	{
+		if (_socket is null)
+			throw new ArgumentNullException("Underlying socket was null");
+		
+		
+		_socket.Shutdown(SocketShutdown.Both);
+		_socket.Dispose();
+	}
+	public Socket Socket => _socket;
+
+		// Implement ITcpReader methods by forwarding calls to the _reader instance
 	public void Read(Stream destination, int length) => _reader.Read(destination, length);
 	public Span<byte> ReadPacket(Span<byte> buffer) => _reader.ReadPacket(buffer);
-
+	public Span<byte> ReadPacket() => _reader.ReadPacket();
 	public Guid ReadGuid() => _reader.ReadGuid();
 	public int ReadInt32() => _reader.ReadInt32();
 	public uint ReadUInt32() => _reader.ReadUInt32();
