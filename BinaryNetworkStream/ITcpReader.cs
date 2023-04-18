@@ -6,6 +6,7 @@ namespace BinaryNetworkStream;
 public interface ITcpReader : IDisposable
 {
 	void Read(Stream destination, int length);
+	Span<byte> ReadPacket(Span<byte> buffer);
 	Guid ReadGuid();
 	int ReadInt32();
 	uint ReadUInt32();

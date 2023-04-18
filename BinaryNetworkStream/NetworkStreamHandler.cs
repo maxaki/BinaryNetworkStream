@@ -18,6 +18,8 @@ public class NetworkStreamHandler : ITcpReader, ITcpWriter
 	
 	// Implement ITcpReader methods by forwarding calls to the _reader instance
 	public void Read(Stream destination, int length) => _reader.Read(destination, length);
+	public Span<byte> ReadPacket(Span<byte> buffer) => _reader.ReadPacket(buffer);
+
 	public Guid ReadGuid() => _reader.ReadGuid();
 	public int ReadInt32() => _reader.ReadInt32();
 	public uint ReadUInt32() => _reader.ReadUInt32();
@@ -36,7 +38,10 @@ public class NetworkStreamHandler : ITcpReader, ITcpWriter
 	public string ReadString() => _reader.ReadString();
 
 	// Implement ITcpWriter methods by forwarding calls to the _writer instance
+
+
 	public void Write(Stream stream) => _writer.Write(stream);
+	public void WritePacket(ReadOnlySpan<byte> buffer) => 	_writer.WritePacket(buffer);
 	public void Write(ReadOnlySpan<byte> buffer) => _writer.Write(buffer);
 	public void Write(bool value) => _writer.Write(value);
 	public void Write(byte value) => _writer.Write(value);
