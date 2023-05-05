@@ -6,6 +6,8 @@ namespace BinaryNetworkStream;
 public interface ITcpReader : IDisposable
 {
 	void Read(Stream destination, int length);
+	void Read(byte[] destination, int length);
+	byte[] ReadBytes(int length);
 	void ReadPacket(byte[] buffer);
 	byte[] ReadPacket();
 	Guid ReadGuid();
@@ -13,11 +15,13 @@ public interface ITcpReader : IDisposable
 	uint ReadUInt32();
 	long ReadInt64();
 	ulong ReadUInt64();
+	ulong ReadUInt64Reverse();
 	bool ReadBoolean();
 	double ReadDouble();
 	float ReadFloat();
 	char ReadChar();
 	ushort ReadUInt16();
+	short ReadInt16Reverse();
 	sbyte ReadSByte();
 	byte ReadByte();
 	short ReadInt16();

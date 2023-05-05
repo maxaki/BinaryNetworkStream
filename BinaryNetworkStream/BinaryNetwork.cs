@@ -42,6 +42,9 @@ public sealed class BinaryNetwork : ITcpReader, ITcpWriter
 	/// <param name="length">The number of bytes to read from the underlying socket.</param>
 	public void Read(Stream destination, int length) => _reader.Read(destination, length);
 	
+	public void Read(byte[] destination, int length) => _reader.Read(destination, length);
+	public byte[] ReadBytes(int length) => _reader.ReadBytes(length);
+	
 	/// <summary>
 	/// Reads a packet from the underlying socket by first reading a header containing the size of the packet as an integer, 
 	/// and then reads the rest of the packet data into the provided buffer. If the buffer is not large enough to contain the
@@ -81,15 +84,22 @@ public sealed class BinaryNetwork : ITcpReader, ITcpWriter
 	public uint ReadUInt32() => _reader.ReadUInt32();
 	public long ReadInt64() => _reader.ReadInt64();
 	public ulong ReadUInt64() => _reader.ReadUInt64();
+	public ulong ReadUInt64Reverse() => _reader.ReadUInt64Reverse();
+	
 	public bool ReadBoolean() => _reader.ReadBoolean();
 	public double ReadDouble() => _reader.ReadDouble();
 	public float ReadFloat() => _reader.ReadFloat();
 	public char ReadChar() => _reader.ReadChar();
-	public ushort ReadUInt16() => _reader.ReadUInt16();
+
+	
+
 	public sbyte ReadSByte() => _reader.ReadSByte();
 	public byte ReadByte() => _reader.ReadByte();
 
 	public short ReadInt16() => _reader.ReadInt16();
+	public ushort ReadUInt16() => _reader.ReadUInt16();
+	public short ReadInt16Reverse() => _reader.ReadInt16Reverse();
+	
 	public decimal ReadDecimal() => _reader.ReadDecimal();
 	public string ReadString() => _reader.ReadString();
 

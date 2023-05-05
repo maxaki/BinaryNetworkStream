@@ -15,6 +15,23 @@ public class NetworkReader : TcpReader, ITcpReader
 		ReadToStream(destination, length);
 	}
 
+	public void Read(byte[] destination, int length)
+	{
+		ReadBytesCore(destination.AsSpan(0, length));
+	}
+	public byte[] ReadBytes(int length)
+	{
+		var buffer = new byte[length];
+		ReadBytesCore(buffer);
+		return buffer;
+	}
+
+	private Span<byte> ReadReverse(Span<byte> buffer)
+	{
+		ReadBytesCore(buffer);
+		buffer.Reverse();
+		return buffer;
+	}
 	private Span<byte> Read(Span<byte> buffer)
 	{
 		ReadBytesCore(buffer);
@@ -42,6 +59,9 @@ public class NetworkReader : TcpReader, ITcpReader
 	public uint ReadUInt32() => BitConverter.ToUInt32(Read(stackalloc byte[sizeof(uint)]));
 	public long ReadInt64() => BitConverter.ToInt64(Read(stackalloc byte[sizeof(long)]));
 	public ulong ReadUInt64() => BitConverter.ToUInt64(Read(stackalloc byte[sizeof(ulong)]));
+	public ulong ReadUInt64Reverse() => BitConverter.ToUInt64(ReadReverse(stackalloc byte[sizeof(ulong)]));
+
+
 	public bool ReadBoolean() => Read(stackalloc byte[sizeof(bool)])[0] != 0;
 	public double ReadDouble() => BitConverter.ToDouble(Read(stackalloc byte[sizeof(double)]));
 	public float ReadFloat() => BitConverter.ToSingle(Read(stackalloc byte[sizeof(float)]));
@@ -50,6 +70,8 @@ public class NetworkReader : TcpReader, ITcpReader
 	public sbyte ReadSByte() => (sbyte) Read(stackalloc byte[1])[0];
 	public byte ReadByte() => Read(stackalloc byte[1])[0];
 	public short ReadInt16() => BitConverter.ToInt16(Read(stackalloc byte[sizeof(short)]));
+	public short ReadInt16Reverse() => BitConverter.ToInt16(ReadReverse(stackalloc byte[sizeof(short)]));
+
 
 	public decimal ReadDecimal()
 	{
